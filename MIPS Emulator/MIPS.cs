@@ -57,11 +57,11 @@ namespace MIPS_Emulator
 		public static ID_EX ID_EX = new ID_EX();
 		public static EX_MEM EX_MEM = new EX_MEM();
 		public static MEM_WB MEM_WB = new MEM_WB();
-		public static Dictionary<int, int> MEMORY = new Dictionary<int, int>();
-		//public static int[] MEMORY = new int 
+		//public static Dictionary<int, int> MEMORY = new Dictionary<int, int>();
+		public static int[] MEMORY = new int[1000];
 		public static Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
 		
-		private static RegesterFile RegesterFile = new RegesterFile();
+		public static RegesterFile RegesterFile = new RegesterFile();
 
 		private static string CurrentInstruction;
 		/// <summary>
