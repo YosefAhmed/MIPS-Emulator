@@ -58,12 +58,12 @@ namespace MIPS_Emulator
 		public static EX_MEM EX_MEM = new EX_MEM();
 		public static MEM_WB MEM_WB = new MEM_WB();
 		//public static Dictionary<int, int> MEMORY = new Dictionary<int, int>();
-		public static int[] MEMORY = new int[1000];
+		public static int[] MEMORY = new int[2000];
 		public static Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
 		
 		public static RegesterFile RegesterFile = new RegesterFile();
 
-		private static string CurrentInstruction;
+		//private static string CurrentInstruction;
 		/// <summary>
 		/// Class Constructor
 		/// </summary>
@@ -112,29 +112,73 @@ namespace MIPS_Emulator
 			}
 		}
 
-		internal static void WriteBack()
+		internal static void Fetch()
 		{
-			RegesterFile.writeReg = MEM_WB.RegDst;
-			//R
-			if(MEM_WB.Funct != -1)
+			string instruction = INSTRUCTION_MEM[PC];
+			PC += 4;
+			IF_ID.PC = PC;
+			string Iterator = "";
+			for (int i = 0; i < instruction.Length; i++)
 			{
-				RegesterFile.writeData = MEM_WB.ALUResult;
+				Iterator += instruction[i];
+				if (i == 5)
+				{
+					int op = Convert.ToInt32(Iterator, 2);
+					IF_ID.OP = op;
+					Iterator = "";
+				}
+				if (i == 10)
+				{
+					int rs = Convert.ToInt32(Iterator, 2);
+					IF_ID.RS = rs;
+					Iterator = "";
+				}
+				if (i == 15)
+				{
+					int rt = Convert.ToInt32(Iterator, 2);
+					IF_ID.RT = rt;
+					Iterator = "";
+				}
+				if (i == 20 && IF_ID.OP == 0)
+				{
+					int rd = Convert.ToInt32(Iterator, 2);
+					IF_ID.RD = rd;
+					Iterator = "";
+				}
+				if (i == 25 && IF_ID.OP == 0)
+				{
+					Iterator = "";
+				}
+				if (i == 31 && IF_ID.OP == 0)
+				{
+					int funct = Convert.ToInt32(Iterator, 2);
+					IF_ID.Funct = funct;
+					Iterator = "";
+				}
+				if (i == 31 && IF_ID.OP == 35)
+				{
+					int offset = Convert.ToInt32(Iterator, 2);
+					IF_ID.Offset = offset;
+					IF_ID.Funct = -1;
+					Iterator = "";
+				}
 			}
-			//I
-			else
-			{
-				RegesterFile.writeData = MEM_WB.ReadData;
-			}
-			REGESTERS[RegesterFile.writeReg] = RegesterFile.writeData;
 		}
 
-		internal static void AccessMem()
+		internal static void Decode()
 		{
-			MEM_WB.Funct = EX_MEM.Funct;
-			MEM_WB.ALUResult = EX_MEM.Result;
-			MEM_WB.RegDst = EX_MEM.RegDst;
-			//MEM_WB.ReadData = MEMORY[MEM_WB.ALUResult];
-			MEM_WB.ReadData = 99;
+			RegesterFile.readReg1 = IF_ID.RS;
+			RegesterFile.readReg2 = IF_ID.RT;
+			//RegesterFile.writeReg = IF_ID.RD;
+			RegesterFile.readData1 = REGESTERS[RegesterFile.readReg1];
+			RegesterFile.readData2 = REGESTERS[RegesterFile.readReg2];
+
+			ID_EX.ExtendOffset = IF_ID.Offset;
+			ID_EX.IRegDst = IF_ID.RT;
+			ID_EX.RRegDst = IF_ID.RD;
+			ID_EX.ReadData1 = RegesterFile.readData1;
+			ID_EX.ReadData2 = RegesterFile.readData2;
+			ID_EX.ALUOp = IF_ID.Funct;
 		}
 
 		internal static void Excute()
@@ -164,6 +208,7 @@ namespace MIPS_Emulator
 			{
 				//Add
 				case 32:
+				case -1:
 					result = in1 + in2;
 					break;
 				//Sub
@@ -184,72 +229,28 @@ namespace MIPS_Emulator
 			}
 		}
 
-		internal static void Decode()
+		internal static void AccessMem()
 		{
-			RegesterFile.readReg1 = IF_ID.RS;
-			RegesterFile.readReg2 = IF_ID.RT;
-			RegesterFile.writeReg = IF_ID.RD;
-			RegesterFile.readData1 = REGESTERS[RegesterFile.readReg1];
-			RegesterFile.readData2 = REGESTERS[RegesterFile.readReg2];
-
-			ID_EX.ExtendOffset = IF_ID.Offset;
-			ID_EX.IRegDst = IF_ID.RT;
-			ID_EX.RRegDst = IF_ID.RD;
-			ID_EX.ReadData1 = RegesterFile.readData1;
-			ID_EX.ReadData2 = RegesterFile.readData2;
-			ID_EX.ALUOp = IF_ID.Funct;
+			MEM_WB.Funct = EX_MEM.Funct;
+			MEM_WB.ALUResult = EX_MEM.Result;
+			MEM_WB.RegDst = EX_MEM.RegDst;
+			//MEM_WB.ReadData = MEMORY[MEM_WB.ALUResult];
+			MEM_WB.ReadData = 99;
 		}
-		internal static void Fetch()
+		internal static void WriteBack()
 		{
-			CurrentInstruction = INSTRUCTION_MEM[PC];
-			PC += 4;
-			IF_ID.PC = PC;
-			string Iterator = "";
-			for (int i = 0; i < CurrentInstruction.Length; i++)
+			RegesterFile.writeReg = MEM_WB.RegDst;
+			//R
+			if(MEM_WB.Funct != -1)
 			{
-				Iterator += CurrentInstruction[i];
-				if (i == 5)
-				{
-					int op = Convert.ToInt32(Iterator, 2);
-					IF_ID.OP = op;
-					Iterator = "";
-				}
-				if (i == 10)
-				{
-					int rs = Convert.ToInt32(Iterator, 2);
-					IF_ID.RS = rs;
-					Iterator = "";
-				}
-				if (i == 15)
-				{
-					int rt = Convert.ToInt32(Iterator, 2);
-					IF_ID.RT = rt;
-					Iterator = "";
-				}
-				if (i == 20 && IF_ID.OP == 0)
-				{
-					int rd = Convert.ToInt32(Iterator, 2);
-					IF_ID.RD = rd;
-					Iterator = "";
-				}
-				if (i == 25)
-				{
-					Iterator = "";
-				}
-				if(i == 31 && IF_ID.OP == 0)
-				{
-					int funct = Convert.ToInt32(Iterator, 2);
-					IF_ID.Funct = funct;
-					Iterator = "";
-				}
-				if (i == 31 && IF_ID.OP == 35)
-				{
-					int offset = Convert.ToInt32(Iterator, 2);
-					IF_ID.Offset = offset;
-					IF_ID.Funct = -1;
-					Iterator = "";
-				}
+				RegesterFile.writeData = MEM_WB.ALUResult;
 			}
+			//I
+			else
+			{
+				RegesterFile.writeData = MEM_WB.ReadData;
+			}
+			REGESTERS[RegesterFile.writeReg] = RegesterFile.writeData;
 		}
 	}
 }

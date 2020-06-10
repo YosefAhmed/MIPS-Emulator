@@ -103,15 +103,19 @@ namespace MIPS_Emulator
 
 
 		}
+		bool initialized = false;
 		private void initializeBtn_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				//Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
-				string[] instructions = userCodeTxt.Text.Split('\n');
-				MIPS.PC = Convert.ToInt32(pcTxt.Text);
-				MIPS.SplitInstructions(instructions);	
-
+				if (!initialized)
+				{
+					//Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
+					string[] instructions = userCodeTxt.Text.Split('\n');
+					MIPS.PC = Convert.ToInt32(pcTxt.Text);
+					MIPS.SplitInstructions(instructions);
+					initialized = true;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -119,25 +123,47 @@ namespace MIPS_Emulator
 			}
 		}
 
-		int numberOfCycles = 0;
+		int CycleNumber = 0;
 		private void runBtn_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				if (numberOfCycles <= 5+(MIPS.INSTRUCTION_MEM.Count-1))
-				{
-					
-					MIPS.WriteBack();
-					MIPS.AccessMem();
-					MIPS.Excute();
-					MIPS.Decode();
-					MIPS.Fetch();
+				if (initialized) { 
+					int NumberOfInstructions = MIPS.INSTRUCTION_MEM.Count;
+					if (CycleNumber < 5 + (NumberOfInstructions - 1))
+					{
+						if (CycleNumber - 4 < NumberOfInstructions && CycleNumber - 4 >= 0)
+						{
+							MIPS.WriteBack();
+							MIPS.MEM_WB = new MEM_WB();
+						}
+						if (CycleNumber - 3 < NumberOfInstructions && CycleNumber - 3 >= 0)
+						{
+							MIPS.AccessMem();
+							MIPS.EX_MEM = new EX_MEM();
+						}
+						if (CycleNumber - 2 < NumberOfInstructions && CycleNumber - 2 >= 0)
+						{
+							MIPS.Excute();
+							MIPS.ID_EX = new ID_EX();
+						}
+						if (CycleNumber - 1 < NumberOfInstructions && CycleNumber - 1 >= 0)
+						{
+							MIPS.Decode();
+							MIPS.IF_ID = new IF_ID();
+						}
+						if (CycleNumber < NumberOfInstructions)
+							MIPS.Fetch();
 
-					Refresh();
-
+						CycleNumber++;
+						Refresh();
+					}
+					else
+						MessageBox.Show("no instructions to excute");
 				}
 				else
-					MessageBox.Show("no instructions to excute");
+					MessageBox.Show("Please initialize the the values (Press Initialize button!)", "Values not initialized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
 				
 			}
 			catch (Exception ex)
