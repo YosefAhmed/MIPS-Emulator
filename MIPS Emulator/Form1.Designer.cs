@@ -36,6 +36,8 @@
 			this.ValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label3 = new System.Windows.Forms.Label();
 			this.IF_IDGrid = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label4 = new System.Windows.Forms.Label();
 			this.memoryGrid = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,29 +46,27 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.initializeBtn = new System.Windows.Forms.Button();
 			this.runBtn = new System.Windows.Forms.Button();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label6 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.ID_EXGrid = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.label8 = new System.Windows.Forms.Label();
-			this.EX_MEMGrid = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.label9 = new System.Windows.Forms.Label();
 			this.MEM_WBGrid = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label9 = new System.Windows.Forms.Label();
+			this.EX_MEMGrid = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label8 = new System.Windows.Forms.Label();
+			this.ID_EXGrid = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.label7 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.mipsRegsGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.IF_IDGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoryGrid)).BeginInit();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.ID_EXGrid)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.EX_MEMGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.MEM_WBGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.EX_MEMGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.ID_EXGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -150,6 +150,20 @@
 			this.IF_IDGrid.Size = new System.Drawing.Size(124, 269);
 			this.IF_IDGrid.TabIndex = 2;
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.HeaderText = "Data";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn2.Width = 50;
+			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
@@ -225,20 +239,6 @@
 			this.runBtn.UseVisualStyleBackColor = true;
 			this.runBtn.Click += new System.EventHandler(this.runBtn_Click);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.HeaderText = "Data";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 70;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
-			this.dataGridViewTextBoxColumn2.Width = 50;
-			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
@@ -265,91 +265,6 @@
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Pipeline Regesters";
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(131, 31);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(37, 13);
-			this.label7.TabIndex = 0;
-			this.label7.Text = "ID/EX";
-			// 
-			// ID_EXGrid
-			// 
-			this.ID_EXGrid.AllowUserToAddRows = false;
-			this.ID_EXGrid.AllowUserToDeleteRows = false;
-			this.ID_EXGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.ID_EXGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-			this.ID_EXGrid.Location = new System.Drawing.Point(134, 52);
-			this.ID_EXGrid.Name = "ID_EXGrid";
-			this.ID_EXGrid.ReadOnly = true;
-			this.ID_EXGrid.RowHeadersVisible = false;
-			this.ID_EXGrid.Size = new System.Drawing.Size(124, 269);
-			this.ID_EXGrid.TabIndex = 2;
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.HeaderText = "Data";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			this.dataGridViewTextBoxColumn5.ReadOnly = true;
-			this.dataGridViewTextBoxColumn5.Width = 70;
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			this.dataGridViewTextBoxColumn6.ReadOnly = true;
-			this.dataGridViewTextBoxColumn6.Width = 50;
-			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(259, 31);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(51, 13);
-			this.label8.TabIndex = 0;
-			this.label8.Text = "EX/MEM";
-			// 
-			// EX_MEMGrid
-			// 
-			this.EX_MEMGrid.AllowUserToAddRows = false;
-			this.EX_MEMGrid.AllowUserToDeleteRows = false;
-			this.EX_MEMGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.EX_MEMGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8});
-			this.EX_MEMGrid.Location = new System.Drawing.Point(262, 52);
-			this.EX_MEMGrid.Name = "EX_MEMGrid";
-			this.EX_MEMGrid.ReadOnly = true;
-			this.EX_MEMGrid.RowHeadersVisible = false;
-			this.EX_MEMGrid.Size = new System.Drawing.Size(124, 269);
-			this.EX_MEMGrid.TabIndex = 2;
-			// 
-			// dataGridViewTextBoxColumn7
-			// 
-			this.dataGridViewTextBoxColumn7.HeaderText = "Data";
-			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-			this.dataGridViewTextBoxColumn7.ReadOnly = true;
-			this.dataGridViewTextBoxColumn7.Width = 70;
-			// 
-			// dataGridViewTextBoxColumn8
-			// 
-			this.dataGridViewTextBoxColumn8.HeaderText = "Value";
-			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-			this.dataGridViewTextBoxColumn8.ReadOnly = true;
-			this.dataGridViewTextBoxColumn8.Width = 50;
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(387, 31);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(55, 13);
-			this.label9.TabIndex = 0;
-			this.label9.Text = "MEM/WB";
 			// 
 			// MEM_WBGrid
 			// 
@@ -380,6 +295,91 @@
 			this.dataGridViewTextBoxColumn10.ReadOnly = true;
 			this.dataGridViewTextBoxColumn10.Width = 50;
 			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(387, 31);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(55, 13);
+			this.label9.TabIndex = 0;
+			this.label9.Text = "MEM/WB";
+			// 
+			// EX_MEMGrid
+			// 
+			this.EX_MEMGrid.AllowUserToAddRows = false;
+			this.EX_MEMGrid.AllowUserToDeleteRows = false;
+			this.EX_MEMGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.EX_MEMGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+			this.EX_MEMGrid.Location = new System.Drawing.Point(262, 52);
+			this.EX_MEMGrid.Name = "EX_MEMGrid";
+			this.EX_MEMGrid.ReadOnly = true;
+			this.EX_MEMGrid.RowHeadersVisible = false;
+			this.EX_MEMGrid.Size = new System.Drawing.Size(124, 269);
+			this.EX_MEMGrid.TabIndex = 2;
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.HeaderText = "Data";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			this.dataGridViewTextBoxColumn7.ReadOnly = true;
+			this.dataGridViewTextBoxColumn7.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			this.dataGridViewTextBoxColumn8.ReadOnly = true;
+			this.dataGridViewTextBoxColumn8.Width = 50;
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(259, 31);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(51, 13);
+			this.label8.TabIndex = 0;
+			this.label8.Text = "EX/MEM";
+			// 
+			// ID_EXGrid
+			// 
+			this.ID_EXGrid.AllowUserToAddRows = false;
+			this.ID_EXGrid.AllowUserToDeleteRows = false;
+			this.ID_EXGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.ID_EXGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+			this.ID_EXGrid.Location = new System.Drawing.Point(134, 52);
+			this.ID_EXGrid.Name = "ID_EXGrid";
+			this.ID_EXGrid.ReadOnly = true;
+			this.ID_EXGrid.RowHeadersVisible = false;
+			this.ID_EXGrid.Size = new System.Drawing.Size(124, 269);
+			this.ID_EXGrid.TabIndex = 2;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "Data";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			this.dataGridViewTextBoxColumn5.Width = 70;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.HeaderText = "Value";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.ReadOnly = true;
+			this.dataGridViewTextBoxColumn6.Width = 50;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(131, 31);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(37, 13);
+			this.label7.TabIndex = 0;
+			this.label7.Text = "ID/EX";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -404,9 +404,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoryGrid)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.ID_EXGrid)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.EX_MEMGrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.MEM_WBGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.EX_MEMGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.ID_EXGrid)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

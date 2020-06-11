@@ -64,6 +64,12 @@ namespace MIPS_Emulator
 			MEM_WBGrid.Rows.Add("      Funct", MIPS.MEM_WB.Funct);//23
 			///
 
+			mipsRegsGrid.ClearSelection();
+			IF_IDGrid.ClearSelection();
+			ID_EXGrid.ClearSelection();
+			EX_MEMGrid.ClearSelection();
+			MEM_WBGrid.ClearSelection();
+			memoryGrid.ClearSelection();
 			//IF_IDGrid.Rows.Add("IF/ID", "");
 			//IF_IDGrid.Rows.Add("ID/EX", "");
 			//IF_IDGrid.Rows.Add("EX/MEM", "");
@@ -86,7 +92,19 @@ namespace MIPS_Emulator
 				MIPS.MEMORY[i] = 99;
 				memoryGrid.Rows[i].Cells[1].Value = 99;
 			}
+
+			MIPS.INSTRUCTION_MEM = new Dictionary<int, string>();
+
+			MIPS.MEM_WB = new MEM_WB();
+			MIPS.EX_MEM = new EX_MEM();
+			MIPS.ID_EX = new ID_EX();
+			MIPS.IF_ID = new IF_ID();
+
 			initialized = false;
+			CycleNumber = 0;
+			Refresh();
+			mipsRegsGrid.ClearSelection();
+
 		}
 		private void Refresh()
 		{
@@ -116,10 +134,11 @@ namespace MIPS_Emulator
 
 
 
-
-			mipsRegsGrid.Rows[MIPS.RegesterFile.writeReg].Cells[1].Value = MIPS.REGESTERS[MIPS.RegesterFile.writeReg];
-			mipsRegsGrid.Rows[MIPS.RegesterFile.writeReg].Selected = true;
-
+			if (initialized && CycleNumber >= 5)
+			{
+				mipsRegsGrid.Rows[MIPS.RegesterFile.writeReg].Cells[1].Value = MIPS.REGESTERS[MIPS.RegesterFile.writeReg];
+				mipsRegsGrid.Rows[MIPS.RegesterFile.writeReg].Selected = true;
+			}
 			IF_IDGrid.Update();
 			IF_IDGrid.Refresh();
 
@@ -142,15 +161,15 @@ namespace MIPS_Emulator
 		{
 			try
 			{
-				//Reset();
-				if (!initialized)
-				{
-					//Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
-					string[] instructions = userCodeTxt.Text.Split('\n');
+				Reset();
+				//if (!initialized)
+				//{
+				//Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
+				string[] instructions = userCodeTxt.Text.Split('\n');
 					MIPS.PC = Convert.ToInt32(pcTxt.Text);
 					MIPS.SplitInstructions(instructions);
 					initialized = true;
-				}
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -194,7 +213,9 @@ namespace MIPS_Emulator
 						Refresh();
 					}
 					else
+					{
 						MessageBox.Show("no instructions to excute");
+					}
 				}
 				else
 					MessageBox.Show("Please initialize the the values (Press Initialize button!)", "Values not initialized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
