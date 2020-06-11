@@ -60,6 +60,8 @@
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label7 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.cycleNumberLbl = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.mipsRegsGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.IF_IDGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoryGrid)).BeginInit();
@@ -380,6 +382,23 @@
 			this.label7.TabIndex = 0;
 			this.label7.Text = "ID/EX";
 			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(781, 404);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(74, 13);
+			this.label10.TabIndex = 0;
+			this.label10.Text = "Cycle number ";
+			// 
+			// cycleNumberLbl
+			// 
+			this.cycleNumberLbl.AutoSize = true;
+			this.cycleNumberLbl.Location = new System.Drawing.Point(861, 404);
+			this.cycleNumberLbl.Name = "cycleNumberLbl";
+			this.cycleNumberLbl.Size = new System.Drawing.Size(0, 13);
+			this.cycleNumberLbl.TabIndex = 0;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +413,8 @@
 			this.Controls.Add(this.mipsRegsGrid);
 			this.Controls.Add(this.userCodeTxt);
 			this.Controls.Add(this.label2);
+			this.Controls.Add(this.cycleNumberLbl);
+			this.Controls.Add(this.label10);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label1);
 			this.Name = "Form1";
@@ -446,6 +467,8 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label cycleNumberLbl;
 	}
 }
 

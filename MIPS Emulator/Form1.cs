@@ -19,6 +19,7 @@ namespace MIPS_Emulator
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			//fill Regesters array and data grid view.
 			for (int i = 0; i < 32; i++)
 			{
 				if (i == 0)
@@ -29,13 +30,14 @@ namespace MIPS_Emulator
 				string reg = "$" + i.ToString();
 				mipsRegsGrid.Rows.Add(reg, MIPS.REGESTERS[i]);
 			}
+			//fill data memory array and data grid view
 			for (int i = 0; i < MIPS.MEMORY.Length; i++)
 			{
 				MIPS.MEMORY[i] = 99;
 				memoryGrid.Rows.Add(i, 99);
 			}
 
-			//pipRegsGrid.Rows.Add("IF/ID", "");//0
+			//fill IF/ID regester data grid view
 			IF_IDGrid.Rows.Add("OP", MIPS.IF_ID.OP);//1
 			IF_IDGrid.Rows.Add("RS", MIPS.IF_ID.RS);//2
 			IF_IDGrid.Rows.Add("RT", MIPS.IF_ID.RT);//3
@@ -43,38 +45,39 @@ namespace MIPS_Emulator
 			IF_IDGrid.Rows.Add("Offset", MIPS.IF_ID.Offset);//5
 			IF_IDGrid.Rows.Add("Funct", MIPS.IF_ID.Funct);//6
 
-			////pipRegsGrid.Rows.Add("ID/EX", "");//7
+			//fill ID/EX regester data grid view
 			ID_EXGrid.Rows.Add("ALU OP", MIPS.ID_EX.ALUOp);//8
-			ID_EXGrid.Rows.Add("Inst [15-0]", MIPS.ID_EX.ExtendOffset);//9
+			ID_EXGrid.Rows.Add("Inst [15-0]", MIPS.ID_EX.Offset);//9
 			ID_EXGrid.Rows.Add("Inst [16-20]", MIPS.ID_EX.IRegDst);//10
 			ID_EXGrid.Rows.Add("Inst [15-11]", MIPS.ID_EX.RRegDst);//11
 			ID_EXGrid.Rows.Add("Read Data1", MIPS.ID_EX.ReadData1);//12
 			ID_EXGrid.Rows.Add("Read Data2", MIPS.ID_EX.ReadData2);//13
 
-			////pipRegsGrid.Rows.Add("EX/MEM", "");//14
-			EX_MEMGrid.Rows.Add("      ALU Output", MIPS.EX_MEM.Result);//15
-			EX_MEMGrid.Rows.Add("      RegDst", MIPS.EX_MEM.RegDst);//16
-			EX_MEMGrid.Rows.Add("      Read Data2", MIPS.EX_MEM.Data2);//17
-			EX_MEMGrid.Rows.Add("      Funct", MIPS.EX_MEM.Funct);//18
+			//fill EX/MEM regester data grid view
+			EX_MEMGrid.Rows.Add("ALU Output", MIPS.EX_MEM.Result);//15
+			EX_MEMGrid.Rows.Add("RegDst", MIPS.EX_MEM.RegDst);//16
+			EX_MEMGrid.Rows.Add("Read Data2", MIPS.EX_MEM.Data2);//17
+			EX_MEMGrid.Rows.Add("Funct", MIPS.EX_MEM.Funct);//18
 
-			////pipRegsGrid.Rows.Add("MEM/WB", "");//19
-			MEM_WBGrid.Rows.Add("      Memory Read Data", MIPS.MEM_WB.ReadData);//20
-			MEM_WBGrid.Rows.Add("      ALU Output", MIPS.MEM_WB.ALUResult);//21
-			MEM_WBGrid.Rows.Add("      RegDst", MIPS.MEM_WB.RegDst);//22
-			MEM_WBGrid.Rows.Add("      Funct", MIPS.MEM_WB.Funct);//23
-			///
+			//fill MEM/WB regester data grid view
+			MEM_WBGrid.Rows.Add("Memory Read Data", MIPS.MEM_WB.ReadData);//20
+			MEM_WBGrid.Rows.Add("ALU Output", MIPS.MEM_WB.ALUResult);//21
+			MEM_WBGrid.Rows.Add("RegDst", MIPS.MEM_WB.RegDst);//22
+			MEM_WBGrid.Rows.Add("Funct", MIPS.MEM_WB.Funct);//23
 
+			//deselect all selected raws
 			mipsRegsGrid.ClearSelection();
 			IF_IDGrid.ClearSelection();
 			ID_EXGrid.ClearSelection();
 			EX_MEMGrid.ClearSelection();
 			MEM_WBGrid.ClearSelection();
 			memoryGrid.ClearSelection();
-			//IF_IDGrid.Rows.Add("IF/ID", "");
-			//IF_IDGrid.Rows.Add("ID/EX", "");
-			//IF_IDGrid.Rows.Add("EX/MEM", "");
-			//IF_IDGrid.Rows.Add("MEM/WB", "");
+
 		}
+
+		/// <summary>
+		/// Resets all to default values
+		/// </summary>
 		private void Reset()
 		{
 			for (int i = 0; i < 32; i++)
@@ -94,7 +97,6 @@ namespace MIPS_Emulator
 			}
 
 			MIPS.INSTRUCTION_MEM = new Dictionary<int, string>();
-
 			MIPS.MEM_WB = new MEM_WB();
 			MIPS.EX_MEM = new EX_MEM();
 			MIPS.ID_EX = new ID_EX();
@@ -106,6 +108,10 @@ namespace MIPS_Emulator
 			mipsRegsGrid.ClearSelection();
 
 		}
+
+		/// <summary>
+		/// Refesh the data grid views after each cycles updates
+		/// </summary>
 		private void Refresh()
 		{
 			IF_IDGrid.Rows[0].Cells[1].Value = MIPS.IF_ID.OP;
@@ -116,7 +122,7 @@ namespace MIPS_Emulator
 			IF_IDGrid.Rows[5].Cells[1].Value = MIPS.IF_ID.Funct;
 
 			ID_EXGrid.Rows[0].Cells[1].Value = MIPS.ID_EX.ALUOp;
-			ID_EXGrid.Rows[1].Cells[1].Value = MIPS.ID_EX.ExtendOffset;
+			ID_EXGrid.Rows[1].Cells[1].Value = MIPS.ID_EX.Offset;
 			ID_EXGrid.Rows[2].Cells[1].Value = MIPS.ID_EX.IRegDst;
 			ID_EXGrid.Rows[3].Cells[1].Value = MIPS.ID_EX.RRegDst;
 			ID_EXGrid.Rows[4].Cells[1].Value = MIPS.ID_EX.ReadData1;
@@ -156,20 +162,25 @@ namespace MIPS_Emulator
 
 
 		}
+
+		/// <summary>
+		/// used to check if all values are initialized
+		/// </summary>
 		bool initialized = false;
+
 		private void initializeBtn_Click(object sender, EventArgs e)
 		{
 			try
 			{
+				//reset all values to its default
 				Reset();
-				//if (!initialized)
-				//{
-				//Dictionary<int, string> INSTRUCTION_MEM = new Dictionary<int, string>();
+				//split the instructions string into separate instructions
 				string[] instructions = userCodeTxt.Text.Split('\n');
-					MIPS.PC = Convert.ToInt32(pcTxt.Text);
-					MIPS.SplitInstructions(instructions);
-					initialized = true;
-				//}
+				//set the PC of MIPS with the given
+				MIPS.PC = Convert.ToInt32(pcTxt.Text);
+
+				MIPS.SplitInstructions(instructions);
+				initialized = true;
 			}
 			catch (Exception ex)
 			{
@@ -182,7 +193,8 @@ namespace MIPS_Emulator
 		{
 			try
 			{
-				if (initialized) { 
+				if (initialized) {
+					cycleNumberLbl.Text = (CycleNumber+1).ToString();
 					int NumberOfInstructions = MIPS.INSTRUCTION_MEM.Count;
 					if (CycleNumber < 5 + (NumberOfInstructions - 1))
 					{
