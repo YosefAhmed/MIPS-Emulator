@@ -89,7 +89,7 @@ namespace MIPS_Emulator
 		public static RegesterFile RegesterFile = new RegesterFile();
 
 		/// <summary>
-		/// splits the instructions into PC and Value
+		/// splits the instructions into PC and instruction machine code
 		/// </summary>
 		/// <param name="instructions">array of instructions string</param>
 		internal static void SplitInstructions(string[] instructions)

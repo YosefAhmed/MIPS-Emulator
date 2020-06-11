@@ -178,7 +178,7 @@ namespace MIPS_Emulator
 				string[] instructions = userCodeTxt.Text.Split('\n');
 				//set the PC of MIPS with the given
 				MIPS.PC = Convert.ToInt32(pcTxt.Text);
-
+				//splits the instructions into PC and instruction machine code
 				MIPS.SplitInstructions(instructions);
 				initialized = true;
 			}
@@ -188,6 +188,9 @@ namespace MIPS_Emulator
 			}
 		}
 
+		/// <summary>
+		/// Represents the cycle number
+		/// </summary>
 		int CycleNumber = 0;
 		private void runBtn_Click(object sender, EventArgs e)
 		{
@@ -198,6 +201,9 @@ namespace MIPS_Emulator
 					int NumberOfInstructions = MIPS.INSTRUCTION_MEM.Count;
 					if (CycleNumber < 5 + (NumberOfInstructions - 1))
 					{
+						//****
+						//the next condetions are to excute each phase with instructions in there oreder
+						//****
 						if (CycleNumber - 4 < NumberOfInstructions && CycleNumber - 4 >= 0)
 						{
 							MIPS.WriteBack();
