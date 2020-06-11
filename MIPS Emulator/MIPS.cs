@@ -24,6 +24,13 @@ namespace MIPS_Emulator
 		public int RD;
 		public int Offset;
 		public int Funct;
+
+		//public string ConvertToString()
+		//{
+		//	string regStr="";
+
+		//	return regStr;
+		//}
 	}
 	class ID_EX
 	{
