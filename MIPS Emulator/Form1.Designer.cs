@@ -385,18 +385,20 @@
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(781, 404);
+			this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label10.Location = new System.Drawing.Point(660, 386);
 			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(74, 13);
+			this.label10.Size = new System.Drawing.Size(133, 24);
 			this.label10.TabIndex = 0;
 			this.label10.Text = "Cycle number ";
 			// 
 			// cycleNumberLbl
 			// 
 			this.cycleNumberLbl.AutoSize = true;
-			this.cycleNumberLbl.Location = new System.Drawing.Point(861, 404);
+			this.cycleNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cycleNumberLbl.Location = new System.Drawing.Point(799, 386);
 			this.cycleNumberLbl.Name = "cycleNumberLbl";
-			this.cycleNumberLbl.Size = new System.Drawing.Size(0, 13);
+			this.cycleNumberLbl.Size = new System.Drawing.Size(0, 24);
 			this.cycleNumberLbl.TabIndex = 0;
 			// 
 			// Form1

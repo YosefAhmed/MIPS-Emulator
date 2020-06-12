@@ -104,6 +104,7 @@ namespace MIPS_Emulator
 
 			initialized = false;
 			CycleNumber = 0;
+			cycleNumberLbl.Text = CycleNumber.ToString();
 			Refresh();
 			mipsRegsGrid.ClearSelection();
 

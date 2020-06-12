@@ -276,6 +276,7 @@ namespace MIPS_Emulator
 			MEM_WB.Funct = EX_MEM.Funct;
 			MEM_WB.ALUResult = EX_MEM.Result;
 			MEM_WB.RegDst = EX_MEM.RegDst;
+			//MEM_WB.ReadData = MEMORY[MEM_WB.ALUResult];
 			MEM_WB.ReadData = 99;
 		}
 
